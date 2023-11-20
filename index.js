@@ -17,28 +17,39 @@ function addBookToLibrary(form) {
   library.push(book);
 }
 
-function addBookToGrid() {
-  const latestIndex = library.length - 1;
+function createBookCard(book, index) {
   const card = document.createElement('div');
-  const button = document.createElement('button');
-  const grid = document.getElementById('bookGrid');
-
   card.className = 'card';
-  card.setAttribute('data-index', latestIndex);
-  card.innerText = library[latestIndex].title;
+  card.setAttribute('data-index', index);
+  card.innerText = book.title;
+  return card;
+}
 
+function createRemoveButton(index) {
+  const button = document.createElement('button');
   button.className = 'btn-remove';
-  button.setAttribute('data-index', latestIndex);
+  button.setAttribute('data-index', index);
   button.innerText = 'Remove';
+  return button;
+}
 
-  card.appendChild(button);
-  grid.appendChild(card);
-
+function addRemoveButtonListener(button, card, grid) {
   button.addEventListener('click', () => {
     const index = button.getAttribute('data-index');
     removeBook(index);
     grid.removeChild(card);
   });
+}
+
+function addBookToGrid(book, index) {
+  const grid = document.getElementById('bookGrid');
+  const card = createBookCard(book, index);
+  const button = createRemoveButton(index);
+
+  card.appendChild(button);
+  grid.appendChild(card);
+
+  addRemoveButtonListener(button, card, grid);
 }
 
 function removeBook(index) {
@@ -47,7 +58,8 @@ function removeBook(index) {
 
 document.getElementById('form').addEventListener('submit', (event) => {
   event.preventDefault();
-  addBookToLibrary(event.currentTarget);
-  addBookToGrid();
-  event.currentTarget.reset();
+  const form = event.currentTarget;
+  addBookToLibrary(form);
+  addBookToGrid(library[library.length - 1], library.length - 1);
+  form.reset();
 });
