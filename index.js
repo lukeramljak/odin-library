@@ -25,31 +25,27 @@ function createBookCard(book, index) {
   return card;
 }
 
-function createRemoveButton(index) {
+function createRemoveButton(index, card, grid) {
   const button = document.createElement('button');
   button.className = 'btn-remove';
   button.setAttribute('data-index', index);
   button.innerText = 'Remove';
-  return button;
-}
 
-function addRemoveButtonListener(button, card, grid) {
   button.addEventListener('click', () => {
     const index = button.getAttribute('data-index');
     removeBook(index);
     grid.removeChild(card);
   });
+  return button;
 }
 
 function addBookToGrid(book, index) {
   const grid = document.getElementById('bookGrid');
   const card = createBookCard(book, index);
-  const button = createRemoveButton(index);
+  const button = createRemoveButton(index, card, grid);
 
   card.appendChild(button);
   grid.appendChild(card);
-
-  addRemoveButtonListener(button, card, grid);
 }
 
 function removeBook(index) {
