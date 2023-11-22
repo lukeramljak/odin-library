@@ -1,17 +1,4 @@
-const library = [
-  {
-    title: 'Lord of the Rings',
-    author: 'J.R.R Tolkien',
-    pages: 580,
-    read: 'Yes',
-  },
-  {
-    title: 'American Psycho',
-    author: 'Some Woman',
-    pages: 350,
-    read: 'No',
-  },
-];
+const library = [];
 
 function Book(title, author, pages, read) {
   (this.title = title),
@@ -73,5 +60,3 @@ document.getElementById('form').addEventListener('submit', (event) => {
   updateBookList();
   form.reset();
 });
-
-updateBookList();
