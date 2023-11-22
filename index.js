@@ -1,4 +1,17 @@
-const library = [];
+const library = [
+  {
+    title: 'Book1',
+    author: 'Author',
+    pages: 100,
+    read: 'Yes',
+  },
+  {
+    title: 'Book2',
+    author: 'Author',
+    pages: 100,
+    read: 'No',
+  },
+];
 
 function Book(title, author, pages, read) {
   (this.title = title),
@@ -21,7 +34,15 @@ function createBookCard(book, index) {
   const card = document.createElement('div');
   card.className = 'card';
   card.setAttribute('data-index', index);
-  card.innerText = book.title;
+  card.innerHTML = `
+  Title: ${book.title} 
+  <br>
+  Author: ${book.author}
+  <br>
+  Pages: ${book.pages}
+  <br>
+  Read: ${book.read}
+  `;
   return card;
 }
 
@@ -44,8 +65,8 @@ function addBookToGrid(book, index) {
   const card = createBookCard(book, index);
   const button = createRemoveButton(index, card, grid);
 
-  card.appendChild(button);
   grid.appendChild(card);
+  card.appendChild(button);
 }
 
 function removeBook(index) {
@@ -59,3 +80,6 @@ document.getElementById('form').addEventListener('submit', (event) => {
   addBookToGrid(library[library.length - 1], library.length - 1);
   form.reset();
 });
+
+addBookToGrid(library[0]);
+addBookToGrid(library[1]);
