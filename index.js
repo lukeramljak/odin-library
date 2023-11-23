@@ -32,25 +32,32 @@ const createCard = (book, index) => {
   card.setAttribute('data-index', index);
   card.textContent = `${book.title} by ${book.author}, ${book.pages} pages. ${book.read}`;
 
-  const readButton = document.createElement('button');
-  readButton.className = 'btn-read';
-  readButton.setAttribute('data-index', index);
-  readButton.textContent = 'Toggle';
-
-  const removeButton = document.createElement('button');
-  removeButton.className = 'btn-remove';
-  removeButton.setAttribute('data-index', index);
-  removeButton.textContent = 'Remove';
+  const readButton = createButton('Toggle', 'btn-read', index);
+  const removeButton = createButton('Remove', 'btn-remove', index);
 
   card.appendChild(readButton);
   card.appendChild(removeButton);
+  grid.appendChild(card);
+};
 
-  removeButton.addEventListener('click', (index) => {
+const createButton = (text, className, index) => {
+  const button = document.createElement('button');
+  button.className = className;
+  button.setAttribute('data-index', index);
+  button.textContent = text;
+  return button;
+};
+
+const handleButtonClick = (event) => {
+  const target = event.target;
+  const index = target.getAttribute('data-index');
+
+  if (target.classList.contains('btn-remove')) {
     library.splice(index, 1);
     updateBookList();
-  });
-
-  grid.appendChild(card);
+  } else if (target.classList.contains('btn-read')) {
+    // TODO: toggle read status
+  }
 };
 
 const updateBookList = () => {
@@ -68,6 +75,7 @@ const updateBookList = () => {
     });
   }
 };
+
 document.getElementById('form').addEventListener('submit', (event) => {
   event.preventDefault();
   const form = event.currentTarget;
@@ -75,5 +83,9 @@ document.getElementById('form').addEventListener('submit', (event) => {
   updateBookList();
   form.reset();
 });
+
+document
+  .getElementById('bookGrid')
+  .addEventListener('click', handleButtonClick);
 
 updateBookList();
