@@ -23,32 +23,34 @@ const createCard = (book, index) => {
 
   card.className = 'card';
   card.setAttribute('data-index', index);
-
   card.textContent = `${book.title} by ${book.author}, ${book.pages} pages.`;
 
   const button = document.createElement('button');
   button.className = 'btn-remove';
   button.setAttribute('data-index', index);
   button.textContent = 'Remove';
+
   card.appendChild(button);
 
   button.addEventListener('click', () => {
     const index = button.getAttribute('data-index');
-    removeBook(index);
-    grid.removeChild(card);
+    library.splice(index, 1);
+    updateBookList();
   });
 
   grid.appendChild(card);
 };
 
-const removeBook = (index) => {
-  library.splice(index, 1);
-};
-
 const updateBookList = () => {
   const grid = document.getElementById('bookGrid');
+  const message = document.createElement('p');
   grid.textContent = '';
+  if (library.length === 0) {
+    grid.appendChild(message);
+    message.textContent = 'No books yet.';
+  }
   library.forEach((book, index) => {
+    message.textContent = '';
     createCard(book, index);
   });
 };
