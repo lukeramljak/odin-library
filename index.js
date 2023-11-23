@@ -54,10 +54,11 @@ const handleButtonClick = (event) => {
 
   if (target.classList.contains('btn-remove')) {
     library.splice(index, 1);
-    updateBookList();
   } else if (target.classList.contains('btn-read')) {
-    // TODO: toggle read status
+    const book = library[index];
+    book.read = book.read === 'Read' ? 'Not Read' : 'Read';
   }
+  updateBookList();
 };
 
 const updateBookList = () => {
