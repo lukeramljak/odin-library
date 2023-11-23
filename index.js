@@ -3,7 +3,7 @@ const library = [
     title: 'Book',
     author: 'Author',
     pages: 100,
-    read: 'Read',
+    read: 'Yes',
   },
 ];
 
@@ -30,13 +30,35 @@ const createCard = (book, index) => {
 
   card.className = 'card';
   card.setAttribute('data-index', index);
-  card.textContent = `${book.title} by ${book.author}, ${book.pages} pages. ${book.read}`;
+
+  const contentDiv = document.createElement('div');
+  contentDiv.className = 'card-content';
+
+  for (const prop in book) {
+    if (book.hasOwnProperty(prop)) {
+      const p = document.createElement('p');
+      const span = document.createElement('span');
+      p.textContent = `${prop.charAt(0).toUpperCase() + prop.slice(1)}: `;
+      span.textContent = `${book[prop]}`;
+      span.className = 'book-item';
+
+      p.appendChild(span);
+      contentDiv.appendChild(p);
+    }
+  }
+
+  const buttonsDiv = document.createElement('div');
+  buttonsDiv.className = 'card-buttons';
 
   const readButton = createButton('Toggle', 'btn-read', index);
   const removeButton = createButton('Remove', 'btn-remove', index);
 
-  card.appendChild(readButton);
-  card.appendChild(removeButton);
+  buttonsDiv.appendChild(readButton);
+  buttonsDiv.appendChild(removeButton);
+
+  card.appendChild(contentDiv);
+  card.appendChild(buttonsDiv);
+
   grid.appendChild(card);
 };
 
@@ -56,7 +78,7 @@ const handleButtonClick = (event) => {
     library.splice(index, 1);
   } else if (target.classList.contains('btn-read')) {
     const book = library[index];
-    book.read = book.read === 'Read' ? 'Not Read' : 'Read';
+    book.read = book.read === 'Yes' ? 'No' : 'Yes';
   }
   updateBookList();
 };
