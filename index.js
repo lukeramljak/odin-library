@@ -52,10 +52,11 @@ const createCard = (book, index) => {
   buttonsDiv.className = 'card-buttons';
 
   const readButton = createButton('btn-read', index, book);
+  const editButton = createButton('btn-edit', index, book);
   const removeButton = createButton('btn-remove', index, book);
 
   // TODO: add edit button
-  buttonsDiv.append(readButton, removeButton);
+  buttonsDiv.append(readButton, editButton, removeButton);
   card.append(contentDiv, buttonsDiv);
 
   grid.appendChild(card);
@@ -80,6 +81,8 @@ const createButton = (className, index, book) => {
 
   if (button.classList.contains('btn-remove')) {
     button.textContent = 'Remove';
+  } else if (button.classList.contains('btn-edit')) {
+    button.textContent = 'Edit';
   }
 
   return button;
@@ -94,6 +97,8 @@ const handleButtonClick = (event) => {
   } else if (target.classList.contains('btn-read')) {
     const book = library[index];
     book.read = book.read === 'Yes' ? 'No' : 'Yes';
+  } else if (target.classList.contains('btn-edit')) {
+    // TODO: add edit dialogue
   }
   updateBookList();
 };
@@ -114,12 +119,19 @@ const updateBookList = () => {
   }
 };
 
+document.getElementById('newBook').addEventListener('click', () => {
+  const modal = document.querySelector('dialog');
+  modal.showModal();
+});
+
 document.getElementById('form').addEventListener('submit', (event) => {
   event.preventDefault();
+  const modal = document.querySelector('dialog');
   const form = event.currentTarget;
   addBookToLibrary(form);
   updateBookList();
   form.reset();
+  modal.close();
 });
 
 document
