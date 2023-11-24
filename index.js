@@ -55,7 +55,6 @@ const createCard = (book, index) => {
   const editButton = createButton('btn-edit', index, book);
   const removeButton = createButton('btn-remove', index, book);
 
-  // TODO: add edit button
   buttonsDiv.append(readButton, editButton, removeButton);
   card.append(contentDiv, buttonsDiv);
 
@@ -123,6 +122,8 @@ document.getElementById('newBook').addEventListener('click', () => {
   const modal = document.querySelector('dialog');
   modal.showModal();
 });
+
+// TODO: add behaviour to cancel button
 
 document.getElementById('form').addEventListener('submit', (event) => {
   event.preventDefault();
