@@ -42,7 +42,6 @@ const createCard = (book, index) => {
       const span = document.createElement('span');
       p.textContent = `${prop.charAt(0).toUpperCase() + prop.slice(1)}: `;
       span.textContent = `${book[prop]}`;
-      span.className = 'book-item';
 
       p.appendChild(span);
       contentDiv.appendChild(p);
@@ -55,11 +54,9 @@ const createCard = (book, index) => {
   const readButton = createButton('btn-read', index, book);
   const removeButton = createButton('btn-remove', index, book);
 
-  buttonsDiv.appendChild(readButton);
-  buttonsDiv.appendChild(removeButton);
-
-  card.appendChild(contentDiv);
-  card.appendChild(buttonsDiv);
+  // TODO: add edit button
+  buttonsDiv.append(readButton, removeButton);
+  card.append(contentDiv, buttonsDiv);
 
   grid.appendChild(card);
 };
