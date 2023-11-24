@@ -7,11 +7,13 @@ const library = [
   },
 ];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 }
 
 const addBookToLibrary = (form) => {
@@ -50,8 +52,8 @@ const createCard = (book, index) => {
   const buttonsDiv = document.createElement('div');
   buttonsDiv.className = 'card-buttons';
 
-  const readButton = createButton('Toggle', 'btn-read', index);
-  const removeButton = createButton('Remove', 'btn-remove', index);
+  const readButton = createButton('btn-read', index, book);
+  const removeButton = createButton('btn-remove', index, book);
 
   buttonsDiv.appendChild(readButton);
   buttonsDiv.appendChild(removeButton);
@@ -62,11 +64,27 @@ const createCard = (book, index) => {
   grid.appendChild(card);
 };
 
-const createButton = (text, className, index) => {
+const createButton = (className, index, book) => {
   const button = document.createElement('button');
-  button.className = className;
   button.setAttribute('data-index', index);
-  button.textContent = text;
+  button.className = className;
+
+  switch (book.read) {
+    case 'Yes':
+      button.textContent = 'Mark Unread';
+      break;
+    case 'No':
+      button.textContent = 'Mark Read';
+      break;
+    default:
+      button.textContent = 'Toggle';
+      break;
+  }
+
+  if (button.classList.contains('btn-remove')) {
+    button.textContent = 'Remove';
+  }
+
   return button;
 };
 
