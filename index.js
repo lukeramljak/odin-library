@@ -5,6 +5,12 @@ const library = [
     pages: 100,
     read: 'Yes',
   },
+  {
+    title: 'Book',
+    author: 'Author',
+    pages: 100,
+    read: 'Yes',
+  },
 ];
 
 class Book {
