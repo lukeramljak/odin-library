@@ -136,6 +136,14 @@ document.getElementById('form').addEventListener('submit', (event) => {
     updateBookList();
     form.reset();
     modal.close();
+  } else {
+    Array.from(form.elements).forEach((i) => {
+      if (i.checkValidity()) {
+        i.classList.remove('invalid');
+      } else {
+        i.classList.add('invalid');
+      }
+    });
   }
 });
 

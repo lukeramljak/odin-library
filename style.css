@@ -1,7 +1,7 @@
 :root {
   --background: hsl(0, 0%, 10%);
   --text: hsl(0, 0%, 90%);
-  --red: hsl(0, 98%, 55%);
+  --red: hsl(0, 100%, 64%);
   --blue: hsl(222, 71%, 62%);
 }
 
@@ -57,7 +57,7 @@ h2 {
 dialog {
   background: var(--background);
   color: var(--text);
-  border-radius: 8px;
+  border-radius: 2px;
   left: 0;
   right: 0;
   top: 0;
@@ -87,19 +87,23 @@ dialog {
   & label {
     font-weight: bold;
   }
+}
 
-  & input:not([type='radio']) {
-    background: none;
-    border: none;
-    outline: 1px solid var(--text);
-    border-radius: 2px;
-    padding: 0.25rem;
-    color: var(--text);
+input:not([type='radio']) {
+  background: none;
+  border: none;
+  outline: 1px solid var(--text);
+  border-radius: 2px;
+  padding: 0.25rem;
+  color: var(--text);
 
-    &:focus {
-      outline: 2px solid var(--blue);
-    }
+  &:focus {
+    outline: 2px solid var(--blue);
   }
+}
+
+input.invalid {
+  outline: 2px solid var(--red);
 }
 
 button {
@@ -141,12 +145,12 @@ button {
 
 .btn-remove,
 .btn-cancel {
-  background: hsl(0, 100%, 64%);
+  background: var(--red);
   color: var(--text);
   outline: none;
 
   &:hover {
-    background: var(--red);
+    background: red;
     color: var(--text);
   }
 
