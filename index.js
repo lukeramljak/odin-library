@@ -3,13 +3,13 @@ const library = [
     title: 'Book',
     author: 'Author',
     pages: 100,
-    read: 'Yes',
+    read: 'Read',
   },
   {
-    title: 'Book',
-    author: 'Author',
-    pages: 100,
-    read: 'Yes',
+    title: 'Book2',
+    author: 'Author2',
+    pages: 600,
+    read: 'Not Read Yet',
   },
 ];
 
@@ -45,11 +45,8 @@ const createCard = (book, index) => {
   for (const prop in book) {
     if (book.hasOwnProperty(prop)) {
       const p = document.createElement('p');
-      const span = document.createElement('span');
-      p.textContent = `${prop.charAt(0).toUpperCase() + prop.slice(1)}: `;
-      span.textContent = `${book[prop]}`;
-
-      p.appendChild(span);
+      p.className = `${prop}`;
+      p.textContent = `${book[prop]}`;
       contentDiv.appendChild(p);
     }
   }
@@ -73,10 +70,10 @@ const createButton = (className, index, book) => {
   button.className = className;
 
   switch (book.read) {
-    case 'Yes':
+    case 'Read':
       button.textContent = 'Mark Unread';
       break;
-    case 'No':
+    case 'Not Read Yet':
       button.textContent = 'Mark Read';
       break;
     default:
@@ -101,7 +98,7 @@ const handleButtonClick = (event) => {
     library.splice(index, 1);
   } else if (target.classList.contains('btn-read')) {
     const book = library[index];
-    book.read = book.read === 'Yes' ? 'No' : 'Yes';
+    book.read = book.read === 'Read' ? 'Not Read Yet' : 'Read';
   } else if (target.classList.contains('btn-edit')) {
     // TODO: add edit dialogue
   }
