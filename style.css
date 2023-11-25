@@ -1,7 +1,7 @@
 :root {
   --background: hsl(0, 0%, 10%);
   --text: hsl(0, 0%, 90%);
-  --red: hsl(0, 100%, 64%);
+  --red: hsl(0, 100%, 58%);
   --blue: hsl(222, 71%, 62%);
 }
 
@@ -150,7 +150,7 @@ button {
   outline: none;
 
   &:hover {
-    background: red;
+    background: hsl(0, 100%, 66%);
     color: var(--text);
   }
 
