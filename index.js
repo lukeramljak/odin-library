@@ -55,10 +55,9 @@ const createCard = (book, index) => {
   buttonsDiv.className = 'card-buttons';
 
   const readButton = createButton('btn-read', index, book);
-  const editButton = createButton('btn-edit', index, book);
   const removeButton = createButton('btn-remove', index, book);
 
-  buttonsDiv.append(readButton, editButton, removeButton);
+  buttonsDiv.append(readButton, removeButton);
   card.append(contentDiv, buttonsDiv);
 
   grid.appendChild(card);
@@ -83,8 +82,6 @@ const createButton = (className, index, book) => {
 
   if (button.classList.contains('btn-remove')) {
     button.textContent = 'Remove';
-  } else if (button.classList.contains('btn-edit')) {
-    button.textContent = 'Edit';
   }
 
   return button;
@@ -99,8 +96,6 @@ const handleButtonClick = (event) => {
   } else if (target.classList.contains('btn-read')) {
     const book = library[index];
     book.read = book.read === 'Read' ? 'Unread' : 'Read';
-  } else if (target.classList.contains('btn-edit')) {
-    // TODO: add edit dialogue
   }
   updateBookList();
 };
