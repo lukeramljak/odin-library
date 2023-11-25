@@ -73,6 +73,8 @@ dialog {
 .form {
   display: flex;
   flex-direction: column;
+  width: 60vw;
+  max-width: 600px;
   gap: 1rem;
   padding: 1rem;
 

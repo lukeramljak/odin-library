@@ -11,7 +11,7 @@
     <div class="container">
       <h1>Simple Library</h1>
       <dialog>
-        <form class="form" id="form">
+        <form class="form" id="form" novalidate>
           <div>
             <label for="title">Title</label>
             <input type="text" name="title" id="title" required />
@@ -31,12 +31,7 @@
               <label for="yes">Yes</label>
             </div>
             <div>
-              <input
-                type="radio"
-                name="read"
-                id="no"
-                value="Not Read Yet"
-                required />
+              <input type="radio" name="read" id="no" value="Unread" required />
               <label for="no">No</label>
             </div>
           </div>

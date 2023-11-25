@@ -9,7 +9,7 @@ const library = [
     title: 'Book2',
     author: 'Author2',
     pages: 600,
-    read: 'Not Read Yet',
+    read: 'Unread',
   },
 ];
 
@@ -73,7 +73,7 @@ const createButton = (className, index, book) => {
     case 'Read':
       button.textContent = 'Mark Unread';
       break;
-    case 'Not Read Yet':
+    case 'Unread':
       button.textContent = 'Mark Read';
       break;
     default:
@@ -98,7 +98,7 @@ const handleButtonClick = (event) => {
     library.splice(index, 1);
   } else if (target.classList.contains('btn-read')) {
     const book = library[index];
-    book.read = book.read === 'Read' ? 'Not Read Yet' : 'Read';
+    book.read = book.read === 'Read' ? 'Unread' : 'Read';
   } else if (target.classList.contains('btn-edit')) {
     // TODO: add edit dialogue
   }
@@ -126,14 +126,23 @@ document.getElementById('newBook').addEventListener('click', () => {
   modal.showModal();
 });
 
-// TODO: add behaviour to cancel button
-
 document.getElementById('form').addEventListener('submit', (event) => {
   event.preventDefault();
   const modal = document.querySelector('dialog');
   const form = event.currentTarget;
-  addBookToLibrary(form);
-  updateBookList();
+
+  if (form.checkValidity()) {
+    addBookToLibrary(form);
+    updateBookList();
+    form.reset();
+    modal.close();
+  }
+});
+
+document.querySelector('.btn-cancel').addEventListener('click', () => {
+  const modal = document.querySelector('dialog');
+  const form = document.getElementById('form');
+
   form.reset();
   modal.close();
 });
