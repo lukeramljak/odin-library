@@ -1,14 +1,14 @@
 const library = [
   {
-    title: 'Book',
-    author: 'Author',
-    pages: 100,
+    title: 'Lord of the Flies',
+    author: 'William Golding',
+    pages: 224,
     read: 'Read',
   },
   {
-    title: 'Book2',
-    author: 'Author2',
-    pages: 600,
+    title: 'Dune',
+    author: 'Frank Herbert',
+    pages: 896,
     read: 'Unread',
   },
 ];
