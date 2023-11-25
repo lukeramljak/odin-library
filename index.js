@@ -123,6 +123,14 @@ const updateBookList = () => {
 
 document.getElementById('newBook').addEventListener('click', () => {
   const modal = document.querySelector('dialog');
+  const form = document.getElementById('form');
+
+  Array.from(form.elements).forEach((i) => {
+    if (i.classList.contains('invalid')) {
+      i.classList.remove('invalid');
+    }
+  });
+
   modal.showModal();
 });
 
@@ -149,7 +157,6 @@ document.getElementById('form').addEventListener('submit', (event) => {
 
 document.querySelector('.btn-cancel').addEventListener('click', () => {
   const modal = document.querySelector('dialog');
-  const form = document.getElementById('form');
 
   form.reset();
   modal.close();
