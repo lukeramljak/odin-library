@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="./index.js" defer></script>
-    <title>Document</title>
+    <script type="module" src="./main.js" defer></script>
+    <title>Library</title>
   </head>
   <body>
     <div class="container">
@@ -31,13 +31,14 @@
                 type="radio"
                 name="read"
                 id="yes"
-                value="Read"
+                value="read"
                 checked
-                required />
+                required
+              />
               <label for="yes">Yes</label>
             </div>
             <div>
-              <input type="radio" name="read" id="no" value="Unread" required />
+              <input type="radio" name="read" id="no" value="unread" required />
               <label for="no">No</label>
             </div>
           </div>
