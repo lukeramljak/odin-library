@@ -37,6 +37,8 @@ export const handleButtonClick = (event) => {
     cancelModal();
   } else if (target.classList.contains("btn-read")) {
     book.toggleRead();
+  } else if (target.classList.contains("btn-edit")) {
+    book.edit(index);
   } else if (target.classList.contains("btn-remove")) {
     book.remove(index);
   }
@@ -60,6 +62,23 @@ const showNewBookModal = () => {
 const cancelModal = () => {
   const form = document.getElementById("form");
   const modal = document.querySelector("dialog");
+  form.removeAttribute("data-editing");
   form.reset();
   modal.close();
+};
+
+export const populateForm = (index) => {
+  const modal = document.querySelector("dialog");
+  const form = document.getElementById("form");
+  const book = library[index];
+
+  form[0].value = book.title;
+  form[1].value = book.author;
+  form[2].value = book.pages;
+  book.read === true ? (form[3].checked = true) : (form[4].checked = true);
+
+  form.querySelector(".btn-add").textContent = "Update";
+  form.setAttribute("data-editing", index);
+
+  modal.showModal();
 };

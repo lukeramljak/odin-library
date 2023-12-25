@@ -1,5 +1,5 @@
 import { library } from "./main.js";
-import { renderBookCards } from "./utils.js";
+import { renderBookCards, populateForm } from "./utils.js";
 
 class Book {
   constructor(title, author, pages, read) {
@@ -12,6 +12,10 @@ class Book {
   addToLibrary() {
     library.push(this);
     renderBookCards();
+  }
+
+  edit(index) {
+    populateForm(index);
   }
 
   remove(index) {

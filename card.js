@@ -34,9 +34,11 @@ class Card {
       this.index,
     );
 
+    const editButton = createButton("btn-edit", "Edit", this.index);
+
     const removeButton = createButton("btn-remove", "Remove", this.index);
 
-    buttonsDiv.append(readButton, removeButton);
+    buttonsDiv.append(readButton, editButton, removeButton);
     card.append(contentDiv, buttonsDiv);
 
     const grid = document.getElementById("bookGrid");
