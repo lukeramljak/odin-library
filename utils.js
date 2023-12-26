@@ -75,7 +75,9 @@ const showNewBookModal = () => {
 const cancelModal = () => {
   const form = document.getElementById("form");
   const modal = document.querySelector("dialog");
+  const button = document.querySelector(".btn-add");
   form.removeAttribute("data-editing");
+  button.textContent = "Add Book";
   form.reset();
   modal.close();
 };
