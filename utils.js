@@ -1,5 +1,5 @@
-import { library } from "./main.js";
 import Card from "./card.js";
+import { library } from "./main.js";
 
 export const renderBookCards = () => {
   const grid = document.getElementById("bookGrid");
