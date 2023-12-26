@@ -1,5 +1,9 @@
 import Book from "./book.js";
-import { handleButtonClick, renderBookCards } from "./utils.js";
+import {
+  handleButtonClick,
+  renderBookCards,
+  setInvalidFields,
+} from "./utils.js";
 
 const library = [];
 
@@ -21,13 +25,7 @@ document.getElementById("form").addEventListener("submit", (event) => {
   const button = form.querySelector(".btn-add");
 
   if (!form.checkValidity()) {
-    Array.from(form.elements).forEach((i) => {
-      if (i.checkValidity()) {
-        i.classList.remove("invalid");
-      } else {
-        i.classList.add("invalid");
-      }
-    });
+    setInvalidFields();
   }
 
   if (form.checkValidity() && button.textContent === "Add Book") {

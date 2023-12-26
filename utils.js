@@ -39,6 +39,7 @@ export const handleButtonClick = (event) => {
     book.toggleRead();
   } else if (target.classList.contains("btn-edit")) {
     book.edit(index);
+    resetInvalidFields();
   } else if (target.classList.contains("btn-remove")) {
     book.remove(index);
   }
@@ -46,16 +47,28 @@ export const handleButtonClick = (event) => {
   renderBookCards();
 };
 
-const showNewBookModal = () => {
-  const modal = document.querySelector("dialog");
+export const setInvalidFields = () => {
   const form = document.getElementById("form");
+  Array.from(form.elements).forEach((i) => {
+    if (!i.checkValidity()) {
+      i.classList.add("invalid");
+    } else {
+      i.classList.remove("invalid");
+    }
+  });
+};
 
+const resetInvalidFields = () => {
   Array.from(form.elements).forEach((i) => {
     if (i.classList.contains("invalid")) {
       i.classList.remove("invalid");
     }
   });
+};
 
+const showNewBookModal = () => {
+  const modal = document.querySelector("dialog");
+  resetInvalidFields();
   modal.showModal();
 };
 
