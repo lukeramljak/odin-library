@@ -12,34 +12,31 @@ const handleButtonClick = (event) => {
   const book = library[index];
 
   if (classList.contains("btn-new")) {
-    handleInvalidFields();
     modal.showModal();
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const form = event.currentTarget;
 
       if (!form.checkValidity()) {
         handleInvalidFields();
         return;
       } else {
-        const book = new Book(
+        new Book(
           form.title.value,
           form.author.value,
           parseInt(form.pages.value),
           form.read.value === "read" ? true : false,
-        );
-        book.addToLibrary();
+        ).addToLibrary();
       }
 
       form.reset();
+      resetInvalidFields();
       modal.close();
       renderBookCards();
     });
   }
 
   if (classList.contains("btn-cancel")) {
-    const button = document.querySelector(".btn-add");
-    button.textContent = "Add Book";
+    resetInvalidFields();
     form.reset();
     modal.close();
   }
@@ -52,9 +49,8 @@ const handleButtonClick = (event) => {
     form[0].value = book.title;
     form[1].value = book.author;
     form[2].value = book.pages;
-    book.read === true ? (form[3].checked = true) : (form[4].checked = true);
+    book.read ? (form[3].checked = true) : (form[4].checked = true);
 
-    form.querySelector(".btn-add").textContent = "Update";
     modal.showModal();
 
     form.addEventListener("submit", (event) => {
@@ -76,7 +72,9 @@ const handleButtonClick = (event) => {
   }
 
   if (classList.contains("btn-remove")) {
-    book.remove(index);
+    if (confirm("Are you sure you want to remove this book?")) {
+      book.remove(index);
+    }
   }
 
   renderBookCards();
@@ -107,6 +105,12 @@ const handleInvalidFields = () => {
     i.addEventListener("input", () => {
       i.classList.remove("invalid");
     });
+  });
+};
+
+const resetInvalidFields = () => {
+  Array.from(form.elements).forEach((i) => {
+    i.classList.remove("invalid");
   });
 };
 
